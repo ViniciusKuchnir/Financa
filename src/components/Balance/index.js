@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { 
     View, 
     Text,
-    StyleSheet, 
+    StyleSheet,
+    TouchableOpacity 
 } from 'react-native';
 
 import {MotiView} from 'moti';
+import {Feather} from '@expo/vector-icons';
 
 export default function Balance({saldo, gastos}) {
+
+    const [showValue, setShowValue] = useState(false);
+    const [showSpending, setShowSpending] = useState(false);
+
  return (
    <MotiView 
     style={styles.container}
@@ -26,18 +32,62 @@ export default function Balance({saldo, gastos}) {
     }}
     >
         <View style={styles.item}>
-            <Text style={styles.itemTitle}>Saldo</Text>
+            {
+                showValue ? (
+                    <View style={styles.label}>
+                        <Text style={styles.itemTitle}>Saldo</Text>
+                        <TouchableOpacity onPress={() => setShowValue(!showValue)}>
+                            <Feather name='eye' style={styles.iconEye} size={20} color='#8305b4' />
+                        </TouchableOpacity> 
+                    </View>
+                ) : (
+                    <View style={styles.label}>
+                        <Text style={styles.itemTitle}>Saldo</Text>
+                        <TouchableOpacity onPress={() => setShowValue(!showValue)}>
+                            <Feather name='eye-off' style={styles.iconEye} size={20} color='#8305b4' />
+                        </TouchableOpacity> 
+                    </View>
+                )
+            }
             <View style={styles.content}>
-                <Text style={styles.currencySymbol}>R$</Text>
-                <Text style={styles.balance}>{saldo}</Text>
+                { showValue ? (
+                    <>
+                        <Text style={styles.currencySymbol}>R$</Text>
+                        <Text style={styles.balance}>{saldo}</Text>
+                    </>
+                ): (
+                    <View style={styles.skeleton}></View>    
+                )}
             </View>
         </View>
 
         <View style={styles.item}>
-            <Text style={styles.itemTitle}>Gastos</Text>
+        {
+                showSpending ? (
+                    <View style={styles.label}>
+                        <Text style={styles.itemTitle}>Gastos</Text>
+                        <TouchableOpacity onPress={() => setShowSpending(!showSpending)}>
+                            <Feather name='eye' style={styles.iconEye} size={20} color='#8305b4' />
+                        </TouchableOpacity> 
+                    </View>
+                ) : (
+                    <View style={styles.label}>
+                        <Text style={styles.itemTitle}>Gastos</Text>
+                        <TouchableOpacity onPress={() => setShowSpending(!showSpending)}>
+                            <Feather name='eye-off' style={styles.iconEye} size={20} color='#8305b4' />
+                        </TouchableOpacity> 
+                    </View>
+                )
+            }
             <View style={styles.content}>
-                <Text style={styles.currencySymbol}>R$</Text>
-                <Text style={styles.exprenses}>{gastos}</Text>
+                { showSpending ? (
+                    <>
+                        <Text style={styles.currencySymbol}>R$</Text>
+                        <Text style={styles.expenses}>{gastos}</Text>
+                    </>
+                ): (
+                    <View style={styles.skeleton}></View>    
+                )}
             </View>
         </View>
    </MotiView>
@@ -59,9 +109,14 @@ const styles = StyleSheet.create({
         paddingBottom: 22,
         zIndex: 99,
     },
+    label:{
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     itemTitle:{
         fontSize: 20,
-        color: '#DADADA'
+        color: '#DADADA',
+        marginRight: 14
     },
     content:{
         flexDirection: 'row',
@@ -75,9 +130,15 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: '#2ECC71'
     },
-    exprenses:{
+    expenses:{
         fontSize: 22,
         color: '#E74C3C'
+    },
+    skeleton:{
+        width: 100,
+        height: 34,
+        backgroundColor: '#DADADA',
+        borderRadius: 20,
     }
     
 });
