@@ -13,7 +13,6 @@ import {MotiView, MotiText} from 'moti';
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight + 22 : 64; 
 
 export default function Header({name}){
-
     return(
         <View style={styles.container}>
             <MotiView 
@@ -48,6 +47,7 @@ export default function Header({name}){
                 >
                     Olá, {name}
                 </MotiText>
+
 
                 <TouchableOpacity activeOpacity={0.7} style={styles.buttonUser}>
                     <Feather name="user" size={27} color='#FFF' />

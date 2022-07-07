@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView, StatusBar } from 'react-native';
 import Header from '../../components/Header';
 import Balance from '../../components/Balance';
 import Movements from '../../components/Movements';
@@ -43,6 +42,14 @@ const data = [
 export default function Home() {
   return (
     <ScrollView style={styles.container} verticalScroll={true} showsVerticalScrollIndicator={false}>
+        <StatusBar
+          hidden={false}
+          animated={true}
+          backgroundColor='#8305b4'
+          barStyle='light-content'
+          showHideTransition={'fade'}
+        />
+        
         <Header name="Vinícius Kuchnir" />
         
         <Balance saldo='2800.53' gastos='-527,00' />
