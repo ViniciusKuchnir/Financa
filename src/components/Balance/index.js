@@ -53,7 +53,7 @@ export default function Balance({saldo, gastos}) {
                 { showValue ? (
                     <>
                         <Text style={styles.currencySymbol}>R$</Text>
-                        <Text style={styles.balance}>{saldo}</Text>
+                        <Text style={styles.balance}>{saldo.replace('.', ',')}</Text>
                     </>
                 ): (
                     <View style={styles.skeleton}></View>    
@@ -83,7 +83,7 @@ export default function Balance({saldo, gastos}) {
                 { showSpending ? (
                     <>
                         <Text style={styles.currencySymbol}>R$</Text>
-                        <Text style={styles.expenses}>{gastos}</Text>
+                        <Text style={styles.expenses}>{gastos.replace('.', ',')}</Text>
                     </>
                 ): (
                     <View style={styles.skeleton}></View>    
