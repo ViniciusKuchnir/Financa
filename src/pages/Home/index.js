@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
 import Header from '../../components/Header';
 import Balance from '../../components/Balance';
 import Movements from '../../components/Movements';
 import Actions from '../../components/Actions';
+import LineGraph from '../../components/LineGraph';
 
 const list = [
     {
@@ -29,15 +30,26 @@ const list = [
     },
 ]
 
+const data = [
+    297.00,
+    350.00,
+    600.82,
+    2500.23,
+    2550.23,
+    2555.11,
+    2800.53
+  ]
 
 export default function Home() {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} verticalScroll={true} showsVerticalScrollIndicator={false}>
         <Header name="Vinícius Kuchnir" />
         
-        <Balance saldo='9.250,90' gastos='-527,00' />
+        <Balance saldo='2800.53' gastos='-527,00' />
 
         <Actions />
+
+        <LineGraph data={data}/>
 
         <Text style={styles.title} >Últimas movimentações</Text>
         <FlatList 
@@ -47,7 +59,7 @@ export default function Home() {
             showsVerticalScrollIndicator={false}
             renderItem={({item}) => <Movements data={item}>TESTE</Movements>}
         />
-    </View>
+    </ScrollView>
   );
 }
 
