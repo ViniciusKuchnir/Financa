@@ -14,7 +14,6 @@ export default function Login({navigation}) {
   const [username, setusername] = useState(null);
   const [password, setPassword] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  console.log(showPassword);
 
   return (
     <View style={styles.container}>
